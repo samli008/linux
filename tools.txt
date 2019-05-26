@@ -1,0 +1,1 @@
+yum -y install wget net-tools lrzsz ftp createrepo git screen
