@@ -1,0 +1,14 @@
+#on centos7 installation UI press tab add below 
+net.ifnames=0 biosdevname=0
+
+#on boot menu
+title centos7.5
+	root (hd0,0)
+	kernel /c75/vmlinuz modprobe.blacklist=cnic,bnx2i net.ifnames=0 biosdevname=0 ks=hd:LABEL=USB:/c75/ks.cfg
+	initrd /c75/initrd.img
+
+#on centos7 system modify ifcfg-eno1 to ifcfg-eth0
+cat /etc/sysconfig/grub
+GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb net.ifnames=0 biosdevname=0  quiet"
+grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot
