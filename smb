@@ -1,8 +1,11 @@
+yum -y install samba
+
 useradd liyang
 (echo "liyang"; echo "liyang") | smbpasswd -s -a liyang
 mkdir /kvm/share
 chown -R liyang /kvm/share
 chmod 775 /kvm/share
+
 cat > /etc/samba/smb.conf << EOF
 [global]
         workgroup = WORKGROUP
@@ -23,3 +26,6 @@ EOF
 cat > /etc/samba/smbusers << EOF
 liyang = admin
 EOF
+
+systemctl enable smb
+systemctl start smb
