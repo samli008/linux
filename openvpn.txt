@@ -213,4 +213,13 @@ liyang 123456
 2019-01-19 18:26:14: Successful authentication: username="xiaowang".
 2019-01-19 18:26:58: User does not exist: username="oldboy", password="123456".
 
+#openvpn with docker
+yum -y install docker
+systemctl enable docker
+systemctl start docker
+
+docker load < openvpn.tar
+docker run -d --net=host -p 1194:1194 -h vpn --name vpn --privileged=true openvpn
+
+ss -nlpu
 
