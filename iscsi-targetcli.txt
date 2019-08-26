@@ -34,6 +34,10 @@ o- / ........................................................................ [.
 
 #client host
 yum -y install iscsi-initiator-utils
+cat /etc/iscsi/initiatorname.iscsi 
+InitiatorName=iqn.1994-05.com.redhat:c71
+systemctl restart iscsi
+
 yum -y install device-mapper-multipath
 cp /usr/share/doc/device-mapper-multipath-0.4.9/multipath.conf /etc/
 systemctl enable multipathd
@@ -49,7 +53,6 @@ iscsiadm -m session
 
 fdisk -l |grep sd
 
-multipath -v2
 multipath -ll
 
 vi /etc/multipath.conf
@@ -67,6 +70,10 @@ multipaths {
 #               alias                   red
 #       }
 }
+
+multipath -v2
+systemctl reload multipathd
+multipath -ll
 
 mkfs.xfs /dev/mapper/ps6100
 
