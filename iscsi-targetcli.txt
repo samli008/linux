@@ -47,9 +47,14 @@ lsmod |grep dm
 iscsiadm -m iface -I eth0 -o new
 iscsiadm -m iface -I eth1 -o new
 
-iscsiadm -m discovery -t sendtargets -p IP
+iscsiadm -m discovery -t st -p IP
 iscsiadm -m node -l
+iscsiadm -m node -u
 iscsiadm -m session
+
+[root@c7-1 ~]# cd /var/lib/iscsi/
+[root@c7-1 iscsi]# ls
+ifaces  isns  nodes  send_targets  slp  static
 
 fdisk -l |grep sd
 
