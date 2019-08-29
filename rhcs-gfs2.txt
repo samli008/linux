@@ -1,0 +1,56 @@
+#on centos6.5 config ssh trust
+cat >> /etc/hosts << EOF
+192.168.50.31 node1
+192.168.50.32 node2
+EOF
+ssh-keygen
+ssh-copy-id 
+
+#install rhcs component
+for i in {1..2};do ssh node$i yum -y install cman rgmanager gfs2-utils iscsi-initiator-utils device-mapper-multipath;done
+
+#create rhcs cluster named cluster1
+for i in {1..2};do ssh node$i ccs_tool create cluster1;done
+
+cat /etc/cluster/cluster.conf  #on nodes
+
+#add cluster node to cluster.conf on each node with ccs_tool
+for i in {1..2};do ssh node$i ccs_tool addnode -n 1 node1;done
+for i in {1..2};do ssh node$i ccs_tool addnode -n 2 node2;done
+
+for i in {1..2};do ssh node$i ccs_tool lsnode;done
+
+
+#fix bug
+Waiting for quorum... Timed-out waiting for cluster
+
+vim /etc/init.d/cman
+
+CMAN_QUORUM_TIMEOUT=45
+#replace
+CMAN_QUORUM_TIMEOUT=0
+
+for i in {1..2};do ssh node$i sed -i s/CMAN_QUORUM_TIMEOUT=45/CMAN_QUORUM_TIMEOUT=0/g /etc/init.d/cman; done
+
+#start rhcs service
+for i in {1..2};do ssh node$i service cman start;service rgmanager start;done
+for i in {1..2};do ssh node$i chkconfig cman on;chkconfig rgmanager on;done
+
+
+for i in {1..2};do ssh node$i clustat;done
+
+cman_tool status
+cman_tool nodes
+cman_tool services
+
+ccs_tool update /etc/cluster/cluster.conf
+
+mkfs.gfs2 -j 2 -p lock_dlm -t cluster1:liyang /dev/sdb
+gfs2_jadd -j 1 /dev/sdb
+
+#access rhcs with luci web
+chkconfig ricci on;service ricci start;echo liyang | passwd --stdin ricci; #on nodes
+
+yum -y install luci;chkconfig luci on;service luci start; #on one node for manager rhcs; access luci via https://rhcsaIP:8084
+
+clusvcadm -r http -m rhcsb   #move cluster's service http to rhcsb node from rhcsa
