@@ -224,6 +224,7 @@ docker run -d --net=host -p 1194:1194 -h vpn --name vpn --privileged=true openvp
 #enable forward and nat feature on vpn host
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 systemctl start firewalld
+systemctl enable firewalld
 firewall-cmd --add-service=openvpn --permanent
 firewall-cmd --add-masquerade --permanent
 firewall-cmd --reload
