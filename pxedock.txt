@@ -1,17 +1,12 @@
 pxedock - PXE-booting from a docker container
 
 Overview
-
 This source can be used to build an image for a pxe-boot server. The image contains:
 
 default, minimal configuration using ipxe.kpxe that you can easily override
 lightweight DHCP managing script
 
 The image contains a tftpd and dhcp server to PXE-boot your hosts. The default dhcp configuration will listen for broadcasts on a best guess of the current subnet, but will not offer any addresses. It will also check the hostlist for changes every minute (configurable) and restart the dhcp server if needed. The default tftpd server will contain only the ipxe.kpxe file.
-
-Running
-
-Fetch the pre-built image
 
 The image is published as pxedock.
 
@@ -21,7 +16,12 @@ The image is published as pxedock.
 4.sh pxe.sh
 5.docker logs dhcp
 
-Configure and run
+docker run -d --net=host --name=dhcp --restart=always \
+-e IP=192.168.30.100 \
+-v /root/dhcp:/etc/dhcp:ro \
+-v /root/dhcp:/tftpboot:ro \
+-p 67:67 -p 67:67/udp -p 69:69/udp \
+pxedock
 
 At minimum, to provide the ipxe.kpxe to hosts you need to have dhcp host entries in the form of:
 
