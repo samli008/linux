@@ -1,0 +1,15 @@
+#How to use this image
+docker pull nginx
+docker load < nginx.tar
+
+#echo "autoindex on;" >> nginx.conf
+docker cp web:/etc/nginx/nginx.conf ./
+docker cp nginx.conf web:/etc/nginx/
+
+docker run -d --name web -p 80:80 -v /Users/liyang/share:/usr/share/nginx/html:ro --restart=always nginx
+
+docker exec -it web /bin/bash
+docker stop web
+docker restart web
+docker rm -f web
+docker rmi nginx
