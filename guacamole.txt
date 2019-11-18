@@ -1,6 +1,6 @@
-docker run --name some-guacd -d guacamole/guacd
+docker run --name some-guacd --restart=always -d guacamole/guacd
 
-docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=liyang -d mysql
+docker run --name some-mysql --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=liyang -d mysql
 
 docker exec -it some-mysql /bin/bash
 mysql -u root -pliyang
@@ -11,7 +11,7 @@ grant all on guacamole_db.* to 'liyang'@'%';
 select user,host from mysql.user;
 
 
-docker run --name some-guacamole \
+docker run --name some-guacamole --restart=always \
 --link some-guacd:guacd \
 --link some-mysql:mysql \
 -e MYSQL_DATABASE=guacamole_db  \
