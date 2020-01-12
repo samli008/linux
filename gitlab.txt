@@ -1,0 +1,13 @@
+yum install -y curl policycoreutils-python openssh-server
+yum install postfix
+systemctl enable postfix
+systemctl start postfix
+
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+yum -y install gitlab-ce
+
+export LANG="en_US.utf8"
+export LC_CTYPE="en_US.utf8"
+gitlab-ctl restart
+gitlab-ctl reconfigure
+gitlab-ctl status
