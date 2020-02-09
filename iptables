@@ -12,6 +12,9 @@ iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 iptables -t filter -A FORWARD -i eth0 -o ppp0 -j ACCEPT
 iptables -t filter -A FORWARD -i ppp0 -o eth0 -j ACCEPT
 
+crontab -e
+*/5 * * * * /usr/bin/lynx -mime_header -auth=samli007:liyang008 "http://members.3322.org/dyndns/update?system=dyndns&hostname=samli008.f3322.net" >/dev/null 2>&1 && date >> /root/lynx
+
 cat >> /etc/rc.local << EOF
 iptables -t filter -A FORWARD -i br0 -o br1 -j ACCEPT
 iptables -t filter -A FORWARD -i br1 -o br0 -j ACCEPT
