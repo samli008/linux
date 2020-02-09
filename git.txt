@@ -1,0 +1,41 @@
+git init liyang #init new repository
+git config --global user.name "liyang"
+git config --global user.email "235938019@qq.com"
+cat .git/config  #in current repository
+cat ~/.gitconfig #global config in /root/ 
+
+vi xx.txt
+git add xx.txt
+git status
+git commit -m "description"
+
+git remote add origin https://github.com/samli008/docker.git
+git push -u origin master
+
+git clone https://github.com/samli008/docker
+
+git rm br*
+git commit -m liyang
+git push origin master
+
+git branch
+git branch new-branch
+git checkout new-branch
+git push origin new-branch
+git checkout master
+git branch -d new-branch
+
+git fetch origin master
+cd .git
+ls
+more HEAD 
+more refs/heads/master 
+more FETCH_HEAD
+git push origin master
+git log
+git merge master
+git add *
+git commit -a
+git merge FETCH_HEAD 
+git push origin master
+git pull
