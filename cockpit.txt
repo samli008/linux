@@ -1,0 +1,7 @@
+# install cockpit
+yum -y install cockpit
+systemctl enable cockpit.socket
+systemctl start cockpit.socket
+
+# install storaged-plugin
+yum -y install cockpit-storaged
