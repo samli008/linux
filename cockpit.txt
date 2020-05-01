@@ -1,4 +1,4 @@
-# install cockpit
+# install cockpit access ip:9090 with web
 yum -y install cockpit
 systemctl enable cockpit.socket
 systemctl start cockpit.socket
