@@ -3,6 +3,9 @@ yum -y install cockpit
 systemctl enable cockpit.socket
 systemctl start cockpit.socket
 
+# install dashboard
+yum -y install cockpit-dashboard
+
 # install storaged-plugin
 yum -y install cockpit-storaged
 
