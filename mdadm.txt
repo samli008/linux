@@ -1,3 +1,6 @@
+# install mdadm
+yum -y install mdadm
+
 [root@mdadm ~]# cat /proc/mdstat
 Personalities : 
 unused devices: <none>
