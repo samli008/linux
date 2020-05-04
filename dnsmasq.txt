@@ -19,8 +19,9 @@ nameserver 61.139.2.69
 nameserver 8.8.8.8
 EOF
 
+# config A records PTR records
 cat > /etc/dnsmasq.d/address.conf << EOF
-# A records
+#A records
 address=/c03/192.168.20.143
 address=/c04/192.168.20.144
 address=/c05/192.168.20.151
