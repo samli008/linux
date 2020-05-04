@@ -33,3 +33,8 @@ EOF
 
 # dnsmasq syntax check
 dnsmasq --test
+systemctl enable dnsmasq
+systemctl start dnsmasq
+
+# client check
+yum -y install bind-utils
