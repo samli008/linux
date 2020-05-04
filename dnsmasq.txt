@@ -38,3 +38,10 @@ systemctl start dnsmasq
 
 # client check
 yum -y install bind-utils
+
+cat > /etc/resolv.conf << EOF
+nameserver 192.168.20.143
+EOF
+
+dig c04 @192.168.20.143
+dig 144.20.168.192.in-addr.arpa ptr @192.168.20.143
