@@ -1,0 +1,35 @@
+# install dnsmasq
+yum -y install dnsmasq
+
+# global config
+cat >> /etc/dnsmasq.conf << EOF
+all-servers
+resolv-file=/etc/dnsmasq_resolv.conf
+no-dhcp-interface=
+no-hosts
+cache-size=10000
+log-queries
+log-facility=/var/log/dnsmasq.log
+conf-dir=/etc/dnsmasq.d
+EOF
+
+# config upstream dns-server
+cat > /etc/dnsmasq_resolv.conf << EOF
+nameserver 61.139.2.69
+nameserver 8.8.8.8
+EOF
+
+cat > /etc/dnsmasq.d/address.conf << EOF
+# A records
+address=/c03/192.168.20.143
+address=/c04/192.168.20.144
+address=/c05/192.168.20.151
+
+#PTR records
+ptr-record=143.20.168.192.in-addr.arpa,c03
+ptr-record=144.20.168.192.in-addr.arpa,c04
+ptr-record=151.20.168.192.in-addr.arpa,c05
+EOF
+
+# dnsmasq syntax check
+dnsmasq --test
