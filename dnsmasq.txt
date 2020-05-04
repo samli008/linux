@@ -75,6 +75,6 @@ dhcp-match=set:ipxe,175
 # 1st boot file - Legacy BIOS client
 dhcp-boot=tag:!ipxe,tag:BIOS,ipxe.kpxe,192.168.20.143
 
-# 2nd boot file
+# 2nd boot menu file
 dhcp-boot=tag:ipxe,linux.ipxe
 EOF
