@@ -2,7 +2,7 @@
 yum -y install dnsmasq
 
 # global config
-cat >> /etc/dnsmasq.conf << EOF
+cat > /etc/dnsmasq.conf << EOF
 all-servers
 resolv-file=/etc/dnsmasq_resolv.conf
 no-dhcp-interface=
