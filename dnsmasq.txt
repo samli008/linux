@@ -46,3 +46,39 @@ EOF
 
 dig c04 @192.168.20.143
 dig 144.20.168.192.in-addr.arpa ptr @192.168.20.143
+
+# config dhcp and tftp with dnsmasq
+cat > /etc/dnsmasq.conf << EOF
+# disable DNS server
+port=0
+
+# listen on PXEBOOT vlan (vlan110) only
+listen-address=192.168.20.143
+interface=eth0
+
+# enable built-in tftp server
+enable-tftp
+tftp-root=/root
+
+
+# DHCP range 192.168.20.180 ~ 192.168.20.190
+dhcp-range=192.168.20.180,192.168.20.190,255.255.255.0,24h
+
+# Default gateway
+dhcp-option=3,192.168.20.1
+
+# Broadcast address
+dhcp-option=28,192.168.20.255
+
+# Tag dhcp request from iPXE
+dhcp-match=set:ipxe,175
+
+# inspect the vendor class string and tag BIOS client
+dhcp-vendorclass=BIOS,PXEClient:Arch:00000
+
+# 1st boot file - Legacy BIOS client
+dhcp-boot=tag:!ipxe,tag:BIOS,ipxe.kpxe,192.168.20.143
+
+# 2nd boot file
+dhcp-boot=tag:ipxe,boot.ipxe
+EOF
