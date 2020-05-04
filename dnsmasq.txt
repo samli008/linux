@@ -60,7 +60,6 @@ interface=eth0
 enable-tftp
 tftp-root=/root
 
-
 # DHCP range 192.168.20.180 ~ 192.168.20.190
 dhcp-range=192.168.20.180,192.168.20.190,255.255.255.0,24h
 
