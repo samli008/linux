@@ -78,3 +78,9 @@ dhcp-boot=tag:!ipxe,tag:BIOS,ipxe.kpxe,192.168.20.143
 # 2nd boot menu file
 dhcp-boot=tag:ipxe,linux.ipxe
 EOF
+
+# config web service with apache
+yum -y install httpd
+sed -i 's/\/var\/www\/html/\/tftpboot/g' /etc/httpd/conf/httpd.conf
+systemctl enable httpd
+systemctl start httpd
