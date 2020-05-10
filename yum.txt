@@ -3,6 +3,7 @@ wget http://mirrors.aliyun.com/repo/Centos-7.repo
 wget http://mirrors.aliyun.com/repo/epel.repo
 
 # yum download rpm packages
+mkdir /root/httpd
 yum -y install --downloadonly --downloaddir=/root/httpd httpd
 
 # install createrepo
