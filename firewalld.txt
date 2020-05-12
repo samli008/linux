@@ -20,7 +20,7 @@ firewall-cmd --get-default-zone
 
 # enable NAT
 firewall-cmd --permanent --zone=public --add-masquerade
-fireeall-cmd --reload
+firewall-cmd --reload
 firewall-cmd --query-masquerade
 firewall-cmd --remove-masquerade
 
@@ -38,3 +38,11 @@ firewall-cmd --list-forward-port
 
 # view firewall status
 firewall-cmd --list-all
+
+# use script
+read -p "pls input wlan port: " wlan
+read -p "pls input lan port: " lan
+read -p "pls input lan ip: " ip
+firewall-cmd --permanent --add-forward-port=port=$wlan:proto=tcp:toaddr=$ip:toport=$lan
+firewall-cmd --reload
+firewall-cmd --list-forward-port
