@@ -53,3 +53,19 @@ read -p "pls input lan ip: " ip
 firewall-cmd --permanent --add-forward-port=port=$wlan:proto=tcp:toaddr=$ip:toport=$lan
 firewall-cmd --reload
 firewall-cmd --list-forward-port
+
+# route add with config file
+cat > /etc/sysconfig/network-scripts/route-eth0 << EOF
+ADDRESS0=192.168.20.0
+NETMASK0=255.255.255.0
+GATEWAY0=192.168.20.1
+
+ADDRESS1=192.168.30.0
+NETMASK1=255.255.255.0
+GATEWAY1=192.168.20.1
+EOF
+
+route add -net 192.168.6.0/24 gw 192.168.20.1
+
+# route add on windows
+route -p add 192.168.6.0 mask 255.255.255.0 192.168.20.1
