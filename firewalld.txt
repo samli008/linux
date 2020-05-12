@@ -1,3 +1,15 @@
+# enable kernel forward
+cat >> /etc/sysctl.conf << EOF
+net.ipv4.ip_forward = 1
+EOF
+sysctl -p | grep forward
+
+# install pppoe
+yum -y install rp-pppoe
+pppoe-setup 
+pppoe-start
+pppoe-status
+
 # firewalld service
 systemctl enable firewalld
 systemctl start firewalld
