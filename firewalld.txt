@@ -1,7 +1,8 @@
+# firewalld service
+systemctl enable firewalld
+systemctl start firewalld
 # view zone
-[root@c01 ~]# firewall-cmd --get-zones
-block dmz drop external home internal public trusted work
-[root@c01 ~]# firewall-cmd --get-default-zone
-public
+firewall-cmd --get-zones
+firewall-cmd --get-default-zone
 # view firewall status
-[root@c01 ~]# firewall-cmd --list-all
+firewall-cmd --list-all
