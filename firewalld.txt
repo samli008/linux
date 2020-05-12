@@ -16,7 +16,7 @@ firewall-cmd --remove-masquerade
 firewall-cmd --permanent --zone=public --add-port=53/udp
 firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --permanent --add-service=nfs
-firewall-cmd --permanent --add-service=smb
+firewall-cmd --permanent --add-service=samba
 firewall-cmd --reload
 
 # forward port
