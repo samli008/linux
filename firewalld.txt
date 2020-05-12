@@ -47,12 +47,15 @@ source /etc/rc.local
 firewall-cmd --list-all
 
 # use script
+cat > /usr/local/sbin/port << EOF
 read -p "pls input wlan port: " wlan
 read -p "pls input lan port: " lan
 read -p "pls input lan ip: " ip
 firewall-cmd --permanent --add-forward-port=port=$wlan:proto=tcp:toaddr=$ip:toport=$lan
 firewall-cmd --reload
 firewall-cmd --list-forward-port
+EOF
+chmod 755 /usr/local/sbin/port
 
 # route add with config file
 cat > /etc/sysconfig/network-scripts/route-eth0 << EOF
