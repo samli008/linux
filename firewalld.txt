@@ -1,0 +1,7 @@
+# view zone
+[root@c01 ~]# firewall-cmd --get-zones
+block dmz drop external home internal public trusted work
+[root@c01 ~]# firewall-cmd --get-default-zone
+public
+# view firewall status
+[root@c01 ~]# firewall-cmd --list-all
