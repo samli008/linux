@@ -36,6 +36,13 @@ firewall-cmd --permanent --add-forward-port=port=3200:proto=tcp:toaddr=192.168.6
 firewall-cmd --reload
 firewall-cmd --list-forward-port
 
+# load ftp module on router
+cat >> /etc/rc.local << EOF
+modprobe ip_nat_ftp
+EOF
+chmod 755 /etc/rc.d/rc.local
+source /etc/rc.local
+
 # view firewall status
 firewall-cmd --list-all
 
