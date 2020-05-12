@@ -12,12 +12,16 @@ fireeall-cmd --reload
 firewall-cmd --query-masquerade
 firewall-cmd --remove-masquerade
 
-# accept port
-firewall-cmd --zone=public --add-port=53/udp --permanent
-firewall-cmd --zone=public --add-port=80/tcp --permanent
+# accept port or service
+firewall-cmd --permanent --zone=public --add-port=53/udp
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=smb
+firewall-cmd --reload
 
 # forward port
-firewall-cmd --add-forward-port=port=3200:proto=tcp:toaddr=192.168.6.39:toport=81
+firewall-cmd --permanent --add-forward-port=port=3200:proto=tcp:toaddr=192.168.6.39:toport=81
+firewall-cmd --reload
 
 # view firewall status
 firewall-cmd --list-all
