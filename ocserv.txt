@@ -1,0 +1,38 @@
+# install ocserv
+tar xzvf ocserv.tar
+cat > /etc/yum.repos.d/oc.repo << EOF
+[oc]
+name=oc
+baseurl=file:/root/ocserv
+enabled=1
+gpgcheck=0
+EOF
+yum -y install ocserv
+
+# config ocserv
+cp server-cert.pem /etc/ocserv/
+cp server-key.pem /etc/ocserv/
+cp ocserv.conf /etc/ocserv/
+cp ocpasswd /etc/ocserv/
+
+# start service
+systemctl enable ocserv
+systemctl start ocserv
+
+# config user
+ocpasswd -c /etc/ocserv/ocpasswd liyang
+
+# config firewalld
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
+firewall-cmd --permanent --add-masquerade
+firewall-cmd --permanent --direct --passthrough ipv4 -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+firewall-cmd --permanent --zone=public --add-port=443/tcp
+firewall-cmd --permanent --zone=public --add-port=443/udp
+
+firewall-cmd --reload
+
+firewall-cmd --list-ports
+firewall-cmd --list-service
+firewall-cmd --query-masquerade
