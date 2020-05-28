@@ -29,3 +29,9 @@ EOF
 
 systemctl enable smb
 systemctl start smb
+
+# list samba user
+pdbedit -L
+
+# delete samba user
+smbpasswd -x liyang
