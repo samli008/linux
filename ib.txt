@@ -5,8 +5,7 @@ mstflint -d 03:00.0 -i fw-ConnectX3-rel-2_42_5000-0CDMG5-FlexBoot-3.4.752.bin b
 # install IB driver on rhel6.8
 yum install libmnl gtk2 atk cairo tcl gcc-gfortran tk
 mount -o loop MLNX_OFED_LINUX-4.4-2.0.7.0-rhel6.8-x86_64.iso /mnt
-cd /mnt
-./mlnxofedinstall --force
+/mnt/mlnxofedinstall --force
 
 # start openibd and opensmd service
 /etc/init.d/openibd restart
