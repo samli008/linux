@@ -7,9 +7,12 @@ yum install libmnl gtk2 atk cairo tcl gcc-gfortran tk
 mount -o loop MLNX_OFED_LINUX-4.4-2.0.7.0-rhel6.8-x86_64.iso /mnt
 /mnt/mlnxofedinstall --force
 
-# start openibd and opensmd service
+# start openibd
 /etc/init.d/openibd restart
 chkconfig openibd on
+
+# start opensmd on only one node
+yum -y install opensm
 service opensmd start
 chkconfig opensmd on
 
@@ -29,3 +32,6 @@ service network restart
 # for demo
 for i in {1..16};do ssh node$i mount -o loop /root/MLNX_OFED_LINUX-4.4-2.0.7.0-rhel6.8-x86_64.iso /mnt;done
 for i in {1..16};do ssh node$i /mnt/mlnxofedinstall --force;done
+
+# check ib status
+ibnodes
