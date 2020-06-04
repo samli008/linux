@@ -1,0 +1,19 @@
+# install packages
+yum -y install fcoe-utils lldpad
+
+# config file
+cd /etc/fcoe
+vi cfg-ethx
+DCB_REQUIRED= "no"
+cp cfg-ethx cfg-em1_1
+cp cfg-ethx cfg-em2_1
+
+# start service
+systemctl enable lldpad
+systemctl start lldpad
+systemctl enable fcoe
+systemctl start fcoe
+
+# view interface
+fcoeadm -i
+
