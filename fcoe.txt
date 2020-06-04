@@ -16,4 +16,3 @@ systemctl start fcoe
 
 # view interface
 fcoeadm -i
-
