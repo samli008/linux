@@ -8,6 +8,8 @@ docker cp nginx.conf web:/etc/nginx/
 
 docker run -d --name web -p 80:80 -v /Users/liyang/share:/usr/share/nginx/html:ro --restart=always nginx
 
+docker run -d --name web -p 6443:443 -v /root/share:/usr/share/nginx/html:ro --restart=always nginx:https
+
 docker exec -it web /bin/bash
 docker stop web
 docker restart web
