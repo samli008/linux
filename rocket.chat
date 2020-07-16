@@ -1,0 +1,13 @@
+docker load < mongo.tar
+docker load < rocketchat.tar
+docker-compose up -d mongo
+docker-compose up -d mongo-init-replica
+docker-compose up -d rocketchat
+
+docker-compose stop rocketchat
+docker-compose rm rocketchat
+docker-compose up -d rocketchat
+
+vi docker-compose.yaml
+image: rocketchat/rocket.chat:develop
+ROOT_URL=http://192.168.6.88:3000
