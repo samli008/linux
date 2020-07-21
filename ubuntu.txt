@@ -1,0 +1,44 @@
+# ubuntu16.04
+sudo passwd root
+
+apt-get install openssh-server
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+service sshd restart
+
+vi /etc/network/interfaces
+
+auto eth0
+iface eth0 inet static
+        address 192.168.0.88
+        netmask 255.255.255.0
+        network 192.168.0.0
+        broadcast 192.168.0.255
+        gateway 192.168.0.1
+        dns-nameservers 61.139.2.69
+
+service networking restart
+
+apt-get install nfs-common 
+
+# ubuntu18.04
+sudo passwd root
+
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+service sshd restart
+
+# network config with netplan
+vi /etc/netplan/50-cloud-init.yaml
+network:
+    ethernets:
+        ens3:
+            addresses: [192.168.6.89/24]
+            dhcp4: false
+            gateway4: 192.168.6.1
+            nameservers:
+                    addresses: [61.139.2.69]
+    version: 2
+
+# config take effect
+netplan apply
