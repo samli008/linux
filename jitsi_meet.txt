@@ -1,0 +1,19 @@
+# How to install jitsi meet on CentOS 7
+
+# ports
+firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --permanent --add-port=443/tcp
+firewall-cmd --permanent --add-port=4443/tcp
+firewall-cmd --permanent --add-port=10000/udp
+firewall-cmd --reload
+
+# configuration
+git clone https://github.com/jitsi/docker-jitsi-meet
+cd docker-jitsi-meet
+cp env.example .env
+./gen-passwords.sh
+mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
+docker-compose up -d
+
+docker-compose stop
+docker-compose rm
