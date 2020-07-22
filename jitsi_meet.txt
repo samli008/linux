@@ -1,4 +1,4 @@
-# How to install jitsi meet on CentOS 7
+# How to install jitsi meet on CentOS7 with docker-compose 
 
 # ports
 firewall-cmd --permanent --add-port=80/tcp
