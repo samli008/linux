@@ -1,7 +1,7 @@
 # install new kernel
 uname -r
 
-yum -y install kernel-4.14.131_generic-862.el7.x86_64.rpm 
+rpm -ivh install kernel-4.14.131_generic-862.el7.x86_64.rpm 
 
 cat /boot/grub2/grub.cfg |grep menuentry
 
@@ -13,6 +13,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 reboot
 
 # load ocfs2 ocfs_dlmfs
+rpm -ivh ocfs2-tools-1.8.5-4.el7.centos.x86_64.rpm
 cd /lib/modules/4.14.131-generic/kernel/fs/ocfs2
 modprobe ocfs2 ocfs2_dlmfs
 lsmod |grep ocfs2
