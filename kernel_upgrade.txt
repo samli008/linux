@@ -19,6 +19,7 @@ modprobe ocfs2 ocfs2_dlmfs
 lsmod |grep ocfs2
 
 # ocfs2 service with systemd
-cp ocfs2_userspace_agent.service /usr/lib/systemd/system/
-systemctl enable ocfs2_userspace_agent.service
-systemctl start ocfs2_userspace_agent.service
+o2cb_ctl -C -n prdcluster -t cluster -a name=prdcluster
+systemctl enable o2cb
+systemctl start o2cb
+systemctl status o2cb
