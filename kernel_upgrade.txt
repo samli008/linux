@@ -1,8 +1,8 @@
 # install new kernel
 uname -r
 
-rpm -ivh kernel-4.14.131_generic-862.el7.x86_64.rpm 
-
+yum -y install linux-firmware-20200124-999.4.git1eb2408c.el7.noarch.rpm
+yum -y install kernel-uek-4.14.35-1902.304.6.3.el7uek.x86_64.rpm 
 cat /boot/grub2/grub.cfg |grep menuentry
 
 # modify /etc/default/grub
