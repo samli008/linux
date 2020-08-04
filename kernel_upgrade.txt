@@ -16,3 +16,8 @@ reboot
 cd /lib/modules/4.14.131-generic/kernel/fs/ocfs2
 modprobe ocfs2 ocfs2_dlmfs
 lsmod |grep ocfs2
+
+# ocfs2 service with systemd
+cp ocfs2_userspace_agent.service /usr/lib/systemd/system/
+systemctl enable ocfs2_userspace_agent.service
+systemctl start ocfs2_userspace_agent.service
