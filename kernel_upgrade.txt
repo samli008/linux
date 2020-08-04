@@ -1,7 +1,7 @@
 # install new kernel
 uname -r
 
-rpm -ivh install kernel-4.14.131_generic-862.el7.x86_64.rpm 
+rpm -ivh kernel-4.14.131_generic-862.el7.x86_64.rpm 
 
 cat /boot/grub2/grub.cfg |grep menuentry
 
