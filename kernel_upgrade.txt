@@ -78,9 +78,10 @@ mkfs.ocfs2 --cluster-size 8K -J size=32M -T mail \
   /dev/drbd0
 
 mounted.ocfs2 -f
-
 o2info --volinfo /dev/drbd0
 
-mkdir -p /cluster/storage
+mount.ocfs2 /dev/drbd0 /mnt
 
+mkdir -p /cluster/storage
 /dev/drbd0  /cluster/storage ocfs2 rw,_netdev 0 0
+mount -a
