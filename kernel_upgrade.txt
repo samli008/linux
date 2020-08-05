@@ -20,7 +20,57 @@ modprobe ocfs2 ocfs2_dlmfs
 lsmod |grep ocfs2
 
 # ocfs2 service with systemd
-o2cb_ctl -C -n prdcluster -t cluster -a name=prdcluster
 systemctl enable o2cb
 systemctl start o2cb
 systemctl status o2cb
+
+# config ocfs cluster
+o2cb list-cluster c1
+o2cb add-node c1 c01 --ip 192.168.100.69
+o2cb add-node c1 c02 --ip 192.168.100.70
+o2cb list-cluster c1
+
+cat > /etc/sysconfig/o2cb << EOF
+# O2CB_ENABLED: 'true' means to load the driver on boot.
+O2CB_ENABLED=true
+
+# O2CB_STACK: The name of the cluster stack backing O2CB.
+O2CB_STACK=o2cb
+
+# O2CB_BOOTCLUSTER: If not empty, the name of a cluster to start.
+O2CB_BOOTCLUSTER=c1
+
+# O2CB_HEARTBEAT_THRESHOLD: Iterations before a node is considered dead.
+O2CB_HEARTBEAT_THRESHOLD=21
+
+# O2CB_IDLE_TIMEOUT_MS: Time in ms before a network connection is considered dead.
+O2CB_IDLE_TIMEOUT_MS=15000
+
+# O2CB_KEEPALIVE_DELAY_MS: Max time in ms before a keepalive packet is sent
+O2CB_KEEPALIVE_DELAY_MS=2000
+
+# O2CB_RECONNECT_DELAY_MS: Min time in ms between connection attempts
+O2CB_RECONNECT_DELAY_MS=2000
+EOF
+
+systemctl enable o2cb
+systemctl enable ocfs2
+
+o2cb register-cluster c1
+
+systemctl status o2cb
+
+# format ocfs2 device
+mkfs.ocfs2 --cluster-size 8K -J size=32M -T mail \
+  --node-slots 2 --label ocfs2_fs --mount cluster \
+  --fs-feature-level=max-features \
+  --cluster-stack=o2cb --cluster-name=tclust \
+  /dev/drbd0
+
+mounted.ocfs2 -f
+
+o2info --volinfo /dev/drbd0
+
+mkdir -p /cluster/storage
+
+/dev/drbd0  /cluster/storage ocfs2 rw,_netdev 0 0
