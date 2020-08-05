@@ -33,7 +33,7 @@ systemctl start o2cb
 systemctl status o2cb
 
 # config ocfs cluster
-o2cb list-cluster c1
+o2cb add-cluster c1
 o2cb add-node c1 c01 --ip 192.168.100.69
 o2cb add-node c1 c02 --ip 192.168.100.70
 o2cb list-cluster c1
