@@ -1,4 +1,12 @@
 # install new kernel
+wget http://public-yum.oracle.com/public-yum-ol6.repo -O /etc/yum.repos.d/public-yum-ol6.repo
+rpm --import http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol6
+
+wget http://public-yum.oracle.com/public-yum-ol7.repo -O /etc/yum.repos.d/public-yum-ol7.repo
+rpm --import http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7
+
+yum install --downloadonly --downloaddir=/root/ kernel-uek ocfs2-tools -y
+
 uname -r
 
 yum -y install linux-firmware-20200124-999.4.git1eb2408c.el7.noarch.rpm
