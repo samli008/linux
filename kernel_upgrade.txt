@@ -57,6 +57,8 @@ systemctl enable o2cb
 systemctl enable ocfs2
 
 o2cb register-cluster c1
+o2cb list-cluster c1
+o2cb cluster-status
 
 systemctl status o2cb
 
