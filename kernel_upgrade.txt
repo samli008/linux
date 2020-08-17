@@ -1,16 +1,22 @@
-# kernel compile
+# kernel compile ocfs2
+
 wget http://vault.centos.org/7.4.1708/updates/Source/SPackages/kernel-3.10.0-693.21.1.el7.src.rpm
-rpm -ivh kernel-3.10.0-693.21.1.el7.src.rpm
+
 yum -y install rpm-build
+yum -y install gcc m4 net-tools bc xmlto asciidoc hmaccalc python-devel newt-devel perl pesign elfutils-devel zlib-devel binutils-devel bison audit-libs-devel java-devel numactl-devel pciutils-devel ncurses-devel perl-ExtUtils-Embed
+
+rpm -ivh kernel-3.10.0-693.21.1.el7.src.rpm
 cd /root/rpmbuild/SPECS/
 vi kernel.spec 
 # now run oldconfig over all the config files
 for i in *.config
 do
-  sed -i "s/# CONFIG_OCFS2_FS is not set/CONFIG_OCFS2_FS=m/" $i #add this line
+  sed -i "s/# CONFIG_OCFS2_FS is not set/CONFIG_OCFS2_FS=m/" $i # add this line
   mv $i .config
 
-%define listnewconfig_fail 0 #modify 1 to 0
+%define listnewconfig_fail 0 # modify 1 to 0
+
+rpmbuild -ba kernel.spec
 
 # install new kernel
 uname -r
