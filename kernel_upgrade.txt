@@ -1,3 +1,17 @@
+# kernel compile
+wget http://vault.centos.org/7.4.1708/updates/Source/SPackages/kernel-3.10.0-693.21.1.el7.src.rpm
+rpm -ivh kernel-3.10.0-693.21.1.el7.src.rpm
+yum -y install rpm-build
+cd /root/rpmbuild/SPECS/
+vi kernel.spec 
+# now run oldconfig over all the config files
+for i in *.config
+do
+  sed -i "s/# CONFIG_OCFS2_FS is not set/CONFIG_OCFS2_FS=m/" $i #add this line
+  mv $i .config
+
+%define listnewconfig_fail 0 #modify 1 to 0
+
 # install new kernel
 uname -r
 
