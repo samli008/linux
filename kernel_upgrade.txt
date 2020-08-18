@@ -20,7 +20,6 @@ rpmbuild -ba kernel.spec
 
 cd /root/rpmbuild/RPMS/x86_64
 rpm -qpl kernel-3.10.0-693.21.1.el7.x86_64.rpm |grep ocfs
-
 rpm -ivh kernel-3.10.0-693.21.1.el7.x86_64.rpm
 
 # install new kernel
