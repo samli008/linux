@@ -1,2 +1,4 @@
 # awk /etc/fstab
 awk -F[=' '] 'NR==10 {print $2}' /etc/fstab
+a=`blkid |grep vdb | awk -F\" '{print $2}'`
+b=`awk -F[=' '] 'NR==10 {print $2}' /etc/fstab`
