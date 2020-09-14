@@ -1,0 +1,2 @@
+# awk /etc/fstab
+awk -F[=' '] 'NR==10 {print $2}' /etc/fstab
