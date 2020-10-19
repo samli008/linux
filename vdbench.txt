@@ -63,6 +63,10 @@ wd=wd3,sd=sd1,xfersize=4k,rdpct=0,openflags=o_direct
 wd=wd4,sd=sd2,xfersize=4k,rdpct=0,openflags=o_direct
 wd=wd5,sd=sd1,xfersize=4k,rdpct=40,openflags=o_direct
 wd=wd6,sd=sd2,xfersize=4k,rdpct=80,openflags=o_direct
+wd=wd7,sd=sd1,xfersize=4k,seekpct=seq,rdpct=100,openflags=o_direct
+wd=wd8,sd=sd1,xfersize=4k,seekpct=random,rdpct=100,openflags=o_direct
+wd=wd9,sd=sd2,xfersize=4k,seekpct=seq,rdpct=0,openflags=o_direct
+wd=wd10,sd=sd2,xfersize=4k,seekpct=random,rdpct=0,openflags=o_direct
 
 rd=run1,wd=(wd1-wd2),iorate=max,elapsed=60,interval=1
 
