@@ -2,7 +2,7 @@
 yum -y install java
 tar xzvf vdbench50407.tar.gz
 
-# vdbench script
+# vdbench script with test1
 hd=default,vdbench=/root/vdbench50407/,user=root,shell=ssh
 hd=hd1,system=c04
 hd=hd2,system=c05
@@ -42,3 +42,14 @@ fwd=fwd23,fsd=fsd3,host=hd2,fileio=sequential,fileselect=sequential,xfersizes=4k
 fwd=fwd24,fsd=fsd4,host=hd2,fileio=sequential,fileselect=sequential,xfersizes=4k,rdpct=40,threads=32
 
 rd=4kread,fwd=(fwd1-fwd4),fwdrate=max,format=yes,elapsed=60,interval=3
+
+# test vdbench
+./vdbench -t
+./vdbench -f test1
+
+# field define
+hd: host define
+sd: storage define
+wd: workload define
+fsd: filesystem define
+fwd: filesystem workload define
