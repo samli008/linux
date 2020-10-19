@@ -47,8 +47,8 @@ rd=4kread,fwd=(fwd1-fwd4),fwdrate=max,format=yes,elapsed=60,interval=3
 hd=default,vdbench=/root/vdbench50407/,user=root,shell=ssh
 hd=hd1,system=c04
 hd=hd2,system=c05
-sd=sd1,hd1,lun=/dev/vdb,threads=32
-sd=sd2,hd2,lun=/dev/vdb,threads=32
+sd=sd1,host=hd1,lun=/dev/vdb,threads=32
+sd=sd2,host=hd2,lun=/dev/vdb,threads=32
 wd=wd1,sd=sd1,xfersize=4k,rdpct=100,openflags=o_direct
 wd=wd2,sd=sd2,xfersize=4k,rdpct=100,openflags=o_direct
 rd=run1,wd=(wd1-wd2),iorate=max,elapsed=60,interval=1
