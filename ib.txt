@@ -3,12 +3,12 @@ yum -y install mstflint
 mstflint -d 03:00.0 -i fw-ConnectX3-rel-2_42_5000-0CDMG5-FlexBoot-3.4.752.bin b
 
 # install IB driver on rhel6.8
-yum install libmnl gtk2 atk cairo tcl gcc-gfortran tk
+yum -y install libmnl gtk2 atk cairo tcl gcc-gfortran tk
 mount -o loop MLNX_OFED_LINUX-4.4-2.0.7.0-rhel6.8-x86_64.iso /mnt
 /mnt/mlnxofedinstall --force
 
 # install IB driver on Centos7.6
-yum install libmnl gtk2 atk cairo tcl gcc-gfortran tk perl libusbx pciutils lsof fuse-libs tcsh
+yum -y install libmnl gtk2 atk cairo tcl gcc-gfortran tk perl libusbx pciutils lsof fuse-libs tcsh
 mount -o loop ib.iso /mnt
 cd /mnt
 ./mlnxofedinstall --force
