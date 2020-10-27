@@ -24,6 +24,12 @@ yum -y install opensm
 service opensmd start
 chkconfig opensmd on
 
+# IB switch split mode on yellow link host
+systemctl start opensmd
+ibnetdiscover
+mlxconfig -d lid-2 s SPLIT_MODE=1
+mlxconfig -d lid-2 q SPLIT_MODE
+
 # config ifcfg-ib0
 cat > /etc/sysconfig/network-scripts/ifcfg-ib0 << EOF
 DEVICE=ib0
@@ -43,3 +49,4 @@ for i in {1..16};do ssh node$i /mnt/mlnxofedinstall --force;done
 
 # check ib status
 ibnodes
+ibstat
