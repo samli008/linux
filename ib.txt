@@ -29,6 +29,7 @@ systemctl start opensmd
 ibnetdiscover
 mlxconfig -d lid-2 s SPLIT_MODE=1
 mlxconfig -d lid-2 q SPLIT_MODE
+flint -d lid-2 swreset
 
 # config ifcfg-ib0
 cat > /etc/sysconfig/network-scripts/ifcfg-ib0 << EOF
