@@ -53,5 +53,10 @@ ibnodes
 ibstat
 
 # ib test
-ib_write_bw -d mlx5_1 -i 1       #on node1 server
-ib_write_bw -d mlx5_1 -i 1 node1 #on node2 client
+ib_write_bw -d mlx5_1 -i 1       # on node1 server
+ib_write_bw -d mlx5_1 -i 1 node1 # on node2 client
+
+# qperf testing
+yum -y install qperf 
+qperf                                # on server node
+qperf 10.0.0.52 -t 10 tcp_bw tcp_lat # on client node
