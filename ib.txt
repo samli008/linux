@@ -51,6 +51,7 @@ for i in {1..16};do ssh node$i /mnt/mlnxofedinstall --force;done
 # check ib status
 ibnodes
 ibstat
+ibdev2netdev
 
 # ib test
 ib_write_bw -d mlx5_1 -i 1       # on node1 server
