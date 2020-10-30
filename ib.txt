@@ -60,6 +60,7 @@ ib_write_bw -d mlx5_1 -i 1 node1 # on node2 client
 yum -y install qperf 
 qperf                                # on server node
 qperf 10.0.0.52 -t 10 tcp_bw tcp_lat # on client node
+qperf 10.0.0.51 -t 10 ud_bw ud_lat   # with RDMA
 
 # view ib card PCIE speed
 lspci -nn | grep -i mellanox
