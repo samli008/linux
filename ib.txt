@@ -62,6 +62,6 @@ qperf                                # on server node
 qperf 10.0.0.52 -t 10 tcp_bw tcp_lat # on client node
 qperf 10.0.0.51 -t 10 ud_bw ud_lat   # with RDMA
 
-# view ib card PCIE speed
+# view ib card PCIE speed need x16
 lspci -nn | grep -i mellanox
 lspci -n -d 15b3:101b -vvv | grep --color Width
