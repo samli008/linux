@@ -12,6 +12,7 @@ yum -y install libmnl gtk2 atk cairo tcl gcc-gfortran tk perl libusbx pciutils l
 mount -o loop ib.iso /mnt
 cd /mnt
 ./mlnxofedinstall --force
+./mlnxofedinstall --with-nfsrdma
 
 systemctl start openibd
 
