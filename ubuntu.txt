@@ -42,3 +42,9 @@ network:
 
 # config take effect
 netplan apply
+
+# Debain 10.6 
+vi /etc/apt/sources.list
+deb http://mirrors.163.com/debian/ buster main contrib non-free
+apt-get update
+apt-get install screen ftp nfs-server samba
