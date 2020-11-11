@@ -47,4 +47,4 @@ netplan apply
 vi /etc/apt/sources.list
 deb http://mirrors.163.com/debian/ buster main contrib non-free
 apt-get update
-apt-get install screen ftp nfs-server samba
+apt-get install screen ftp nfs-server samba open-iscsi
