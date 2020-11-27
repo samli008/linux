@@ -1,0 +1,77 @@
+c04 192.168.8.24上操作
+##安装bind9
+# yum -y install bind bind-utils
+# rpm -qa bind
+
+##配置bind9配置文件
+# vi /etc/named.conf
+listen-on port 53 { 192.168.8.24; }; 
+allow-query     { any; }; 
+forwarders      { 192.168.8.1; }; 
+dnssec-enable no; 
+dnssec-validation no;
+
+##区域配置文件添加到文件末尾
+# vi /etc/named.rfc1912.zones
+zone "host.com" IN {
+        type  master;
+        file  "host.com.zone";
+        allow-update { 192.168.8.24; };
+};
+
+zone "liyang.com" IN {
+        type  master;
+        file  "liyang.com.zone";
+        allow-update { 192.168.8.24; };
+};
+
+##新建区域数据文件1
+# vi /var/named/host.com.zone
+$ORIGIN host.com.
+$TTL 600	; 10 minutes
+@       IN SOA	dns.host.com. dnsadmin.host.com. (
+				2020112701 ; serial
+				10800      ; refresh (3 hours)
+				900        ; retry (15 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS   dns.host.com.
+$TTL 60	; 1 minute
+dns         A    192.168.8.24
+c04         A    192.168.8.24
+c05         A    192.168.8.25
+c06         A    192.168.8.26
+
+
+##新建区域数据文件2
+# vi /var/named/liyang.com.zone
+$ORIGIN liyang.com.
+$TTL 600	; 10 minutes
+@   		IN SOA	dns.liyang.com. dnsadmin.liyang.com. (
+				2020112701 ; serial
+				10800      ; refresh (3 hours)
+				900        ; retry (15 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+				NS   dns.liyang.com.
+$TTL 60	; 1 minute
+dns         A    192.168.8.24
+c04         A    192.168.8.24
+c05         A    192.168.8.25
+c06         A    192.168.8.26
+
+systemctl enable named
+systemctl start named
+
+##修改客户端主机网卡dns地址
+# vi /etc/sysconfig/network-scripts/ifcfg-eth0
+dns修改为192.168.8.24
+#  systemctl restart network
+
+##添加search域名
+vim /etc/resolv.conf
+search host.com
+
+dig -t A c04.host.com @192.168.8.24 +short
