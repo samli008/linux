@@ -12,9 +12,9 @@ timezone --utc Asia/Shanghai
 network  --bootproto=dhcp --device=eth0 --onboot=on
 
 # Use network installation
-url --url=http://192.168.20.147/c74
+#url --url=http://192.168.20.147/c74
 # Use USB installation
-#harddrive --partition=/dev/sdb1 --dir=/c74
+harddrive --partition=/dev/sdb1 --dir=/c74
 
 # System language
 lang zh_CN.UTF-8
