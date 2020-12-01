@@ -50,4 +50,68 @@ logvol swap --vgname=vg1 --size=2000 --name=swap --fstype=swap
 cat > /root/tools << EOF
 yum -y install wget net-tools lrzsz ftp screen
 EOF
+
+cat > /root/net7 << EOW
+read -p "interface name:" name
+read -p "ip addr:" addr
+read -p "gateway:" gateway
+read -p "dns:" dns
+
+cat > /etc/sysconfig/network-scripts/ifcfg-\$name << EOF
+TYPE=Ethernet
+BOOTPROTO=static
+NAME=\$name
+DEVICE=\$name
+ONBOOT=yes
+IPADDR=\$addr
+PREFIX=24
+GATEWAY=\$gateway
+DNS1=\$dns
+EOF
+
+systemctl restart network
+EOW
+
+cat > /root/bond7 << EOW
+read -p "bond name:" name
+read -p "input first interface:" int1
+read -p "input second interface:" int2
+read -p "input bond type:" type
+read -p "ip addr:" addr
+
+modprobe --first-time bonding
+
+cat > /etc/sysconfig/network-scripts/ifcfg-\$name << EOF
+TYPE=Bond
+BOOTPROTO=none
+NAME=\$name
+DEVICE=\$name
+ONBOOT=yes
+IPADDR=\$addr
+PREFIX=24
+BONDING_MASTER=yes
+BONDING_OPTS="mode=\$type miimon=100"
+EOF
+
+cat > /etc/sysconfig/network-scripts/ifcfg-\$int1 << EOF
+TYPE=Ethernet
+BOOTPROTO=none
+NAME=\$int1
+DEVICE=\$int1
+ONBOOT=yes
+MASTER=\$name
+SLAVE=yes
+EOF
+
+cat > /etc/sysconfig/network-scripts/ifcfg-\$int2 << EOF
+TYPE=Ethernet
+BOOTPROTO=none
+NAME=\$int2
+DEVICE=\$int2
+ONBOOT=yes
+MASTER=\$name
+SLAVE=yes
+EOF
+EOW
+
 %end
