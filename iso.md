@@ -2,13 +2,16 @@
 ```
 yum -y install anaconda repodata createrepo mkisofs rsync
 
-mount -o loop c76.iso /mnt/cdrom/
+mkdir /iso
+mount c76.iso /mnt
+cd /mnt
+cp -r * /iso/
 
-cp /mnt/cdrom/repodata/*-x86_64.xml  /ISO/repodata/comps.xml
+cp /mnt/repodata/*-x86_64.xml  /iso/repodata/comps.xml
 
-cd /ISO
+cd /iso
 
-cp /mnt/cdrom/.discinfo /ISO
+cp /mnt/.discinfo /iso
 
 createrepo -g repodata/comps.xml ./
 declare -x discinfo=`head -1 .discinfo`
