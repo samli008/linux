@@ -7,15 +7,12 @@ mount c76.iso /mnt
 cd /mnt
 cp -r * /iso/
 
-cp /mnt/repodata/*-x86_64.xml  /iso/repodata/comps.xml
-
 cd /iso
-
 cp /mnt/.discinfo /iso
+cp repodata/repomd.xml repodata/comps.xml
 
 createrepo -g repodata/comps.xml ./
 declare -x discinfo=`head -1 .discinfo`
-
 createrepo -u "media://$discinfo" -g repodata/comps.xml .
 
 genisoimage -v -cache-inodes -joliet-long -R -J -T -V CENTOS7 -o /root/c76ovirt.iso \
