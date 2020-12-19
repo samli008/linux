@@ -1,19 +1,26 @@
-# install cockpit access ip:9090 with web
+## install cockpit access ip:9090 with web
+```
 yum -y install cockpit
 systemctl enable cockpit.socket
 systemctl start cockpit.socket
-
-# install dashboard
+```
+## install dashboard
+```
 yum -y install cockpit-dashboard
-
-# install storaged-plugin
+```
+## install storaged-plugin
+```
 yum -y install cockpit-storaged
-
-# install kvm-plugin
+```
+## install kvm-plugin
+```
 yum -y install cockpit-machines
-
-# install docker-plugin
+```
+## install docker-plugin
+```
 yum -y install cockpit-docker
-
+```
 # install k8s-plugin
+```
 yum -y install cockpit-kubernetes
+```
