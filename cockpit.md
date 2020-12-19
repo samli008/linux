@@ -25,4 +25,3 @@ yum -y install cockpit-docker
 yum -y install cockpit-kubernetes
 ```
 ![9090](./img/9090.jpg)
-![cockpit](./img/cockpit.jpg)
