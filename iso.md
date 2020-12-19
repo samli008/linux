@@ -2,7 +2,7 @@
 ```
 yum -y install anaconda repodata createrepo mkisofs rsync
 
-mount -o loop CentOS-7.2.iso /mnt/cdrom/
+mount -o loop c76.iso /mnt/cdrom/
 
 cp /mnt/cdrom/repodata/*-x86_64.xml  /ISO/repodata/comps.xml
 
