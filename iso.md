@@ -1,4 +1,4 @@
-## custom iso
+## custom Centos7 iso
 ```
 yum -y install anaconda repodata createrepo mkisofs rsync
 
