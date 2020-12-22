@@ -35,8 +35,10 @@ firewall-cmd --permanent --zone=public --add-port=53/udp
 firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --permanent --zone=public --add-port=7789/tcp
 firewall-cmd --permanent --add-service=nfs
-firewall-cmd --permanent --add-service=samba
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=mountd
 firewall-cmd --permanent --add-service=high-availability
+firewall-cmd --permanent --add-service=samba
 firewall-cmd --reload
 firewall-cmd --list-all
 ```
