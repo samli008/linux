@@ -1,11 +1,14 @@
 # ubuntu16.04
 sudo passwd root
+su - root
 
+# enable root ssh
 apt-get install openssh-server
 vi /etc/ssh/sshd_config
 PermitRootLogin yes
 service sshd restart
 
+# config network
 vi /etc/network/interfaces
 
 auto eth0
@@ -23,6 +26,7 @@ apt-get install nfs-common
 
 # ubuntu18.04
 sudo passwd root
+su - root
 
 vi /etc/ssh/sshd_config
 PermitRootLogin yes
@@ -42,6 +46,16 @@ network:
 
 # config take effect
 netplan apply
+
+# hostname modify
+vi /etc/cloud/cloud.cfg
+preserve_hostname: true
+hostnamectl set-hostname u18
+
+# ovirt agent
+apt-get install -y ovirt-guest-agent
+systemctl enable ovirt-guest-agent
+systemctl start ovirt-guest-agent
 
 # Debain 10.6 
 vi /etc/apt/sources.list
