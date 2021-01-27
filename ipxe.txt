@@ -1,4 +1,4 @@
-yum -y install dhcpd tftp-server xinetd httpd samba
+yum -y install dhcp tftp-server xinetd httpd samba
 
 # configure samba
 useradd liyang
