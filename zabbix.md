@@ -27,3 +27,10 @@ DBName=zabbix
 DBUser=zabbix
 DBPassword=liyang
 ```
+## modify timezone
+```
+vi /etc/httpd/conf.d/zabbix.conf
+php_value date.timezone Asia/Shanghai
+systemctl start httpd
+systemctl enable httpd
+```
