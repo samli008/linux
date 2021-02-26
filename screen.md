@@ -11,5 +11,8 @@ exit                      #exit and turn off session
 ```
 dmesg |grep tty
 screen /dev/ttyS0 9600,cs8
-ctr + a +d  #exit serial console
+ctr + a +d   #exit serial console
+screen -ls   #list screen id
+kill -9 id   #kill screen id
+screen -wipe #clear screen id
 ```
