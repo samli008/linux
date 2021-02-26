@@ -9,6 +9,8 @@ exit                      #exit and turn off session
 ## screen with serial console
 ```
 dmesg |grep tty
+
 screen /dev/ttyS0 9600,cs8
+
 ctr + a +d  #exit serial console
 ```
