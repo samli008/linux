@@ -22,8 +22,6 @@ iface eth0 inet static
 
 service networking restart
 
-apt-get install nfs-common 
-
 # ubuntu18.04
 sudo passwd root
 su - root
@@ -55,6 +53,8 @@ hostnamectl set-hostname u18
 # update sources.list
 sed -i s/archive.ubuntu/mirrors.aliyun/g /etc/apt/sources.list
 apt-get update
+apt-get install multipath-tools open-iscsi
+apt-get install nfs-common 
 
 # ovirt agent
 apt-get install -y ovirt-guest-agent
