@@ -52,6 +52,10 @@ vi /etc/cloud/cloud.cfg
 preserve_hostname: true
 hostnamectl set-hostname u18
 
+# update sources.list
+sed -i s/archive.ubuntu/mirrors.aliyun/g /etc/apt/sources.list
+apt-get update
+
 # ovirt agent
 apt-get install -y ovirt-guest-agent
 systemctl enable ovirt-guest-agent
