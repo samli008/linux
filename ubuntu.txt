@@ -73,6 +73,8 @@ apt-get update
 apt-get install multipath-tools open-iscsi
 apt-get install nfs-common 
 apt-get install nfs-server
+apt intall targetcli-fb
+apt intall pcs
 
 # ovirt agent
 apt-get install -y ovirt-guest-agent
