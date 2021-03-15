@@ -70,10 +70,13 @@ hostnamectl set-hostname u18
 # update sources.list
 sed -i s/archive.ubuntu/mirrors.aliyun/g /etc/apt/sources.list
 apt-get update
-apt-get install multipath-tools open-iscsi
 apt-get install nfs-common 
 apt-get install nfs-server
+apt-get install samba
 apt intall targetcli-fb
+apt-get install multipath-tools open-iscsi
+echo "InitiatorName=iqn.2021-03.com.storage:pcs1" > /etc/iscsi/initiatorname.iscsi
+systemctl restart iscsid open-iscsi
 apt intall pcs
 
 # ovirt agent
