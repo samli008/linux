@@ -77,6 +77,8 @@ apt intall targetcli-fb
 apt-get install multipath-tools open-iscsi
 echo "InitiatorName=iqn.2021-03.com.storage:pcs1" > /etc/iscsi/initiatorname.iscsi
 systemctl restart iscsid open-iscsi
+vi /etc/iscsi/iscsid.conf 
+node.startup = automatic
 apt intall pcs fence-agents -y
 
 # ovirt agent
